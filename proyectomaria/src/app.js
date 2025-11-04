@@ -1,4 +1,4 @@
-import Navegador from './components/layauot/nav';
+import Navegador from './componentes/layauot/nav';
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
      
    
     <Footer/>
+    
     </div>
   );
 }

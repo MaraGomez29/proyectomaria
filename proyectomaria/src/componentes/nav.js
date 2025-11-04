@@ -13,8 +13,8 @@ const Navegador = props => {
             </ul>
         </nav>
     )
-
 }
+
 
 
 export default Navegador;
