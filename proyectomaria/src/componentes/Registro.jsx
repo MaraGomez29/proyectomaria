@@ -29,18 +29,12 @@ function Registro() {
         <input
           type="email"
           placeholder="Ingresa tu correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
         />
 
         <label>Contraseña</label>
         <input
           type="password"
           placeholder="Crea una contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
         />
 
         <button type="submit">Registrarse</button>

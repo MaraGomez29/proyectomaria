@@ -1,33 +1,80 @@
-const db = mysql.createConnection({
+const express = require('express');
+const mysql2 = require ('mysql2');
+const cors = require ("cors");
+const session = require ("express-session");
+const app =express();
+app.use(express.json());
+
+const conecction = mysql2.createConnection({
     host: "localhost",
     user: "root",
-    password:"",
-    database: "escuela"
+    password: "190320",
+    database: "login",
 });
 
-//login
-App.post("/login", (req, res) => {
-    const { usuario, contraseña } = req.body;
-    db.query("SELECT * FROM usuarios WHERE nombre = ? AND password = ?", [usuario, contraseña], (err, result) => {
-        if (err) return res.status(500).json({error:"Error en el servidor"
+app.use( cors({
+    origin:"http://localhost:5173",
+    credentials: true
+}));
+
+app.use(session({
+    secret:"mi-secreto",
+    resave: false,
+    cookie:{ secure:false }
+}));
+
+connection.connect((err)=>{
+    if(err){
+        console.error("error al conectar:", err);
+        return;
+    }
+    console.log("conectado a mi mysql");
+})
+
+app.post("/reqistrarse", (req, res)=>{
+    const{idPersona,Nombre,Contraseña}= req.body;
+    console.log("id",idPersonas)
+    const sql= "INSET INTO personas(idPersonas,Nombre,Contraseña) VALUES (?,?,?)";
+    connection.query(sql, [idPersonas, Nombre, Contraseña], (err, results) => {
+        if (err)
+            return res.status(500).send("error al insertar la cuenta");
+         res.status(201).json({
+            mensaje: "Cuenta agregada",
+            personas: { idPersonas, Nombre, Contraseña }
         });
-        if(result.length > 0){
-            req.session.usuario = result[0];
-            res.json({success: true});
-        } else{
-            res.json({success: false, error:"Usuario o contraseña incorrecta"
-            });
+    });
+});
+
+app.post("/persona",(req,res)=>{
+    const { Nombre, Contraseña } = req. body;
+    console. log("Nombre: ", req.body.Nombre);
+    console. log("Contraseña: ", req.body.Contraseña);
+    const sql = "SELECT * FROM personas WHERE Nombre =? AND Contraseña =?";
+    connection . query(sql, [Nombre, Contraseña], (err, results) => {
+        console.log("result: ", results);
+          if (err)
+            return res.status(500).send("No se pudo iniciar sesion");
+        console.log("results", results)
+        if (results.length > 0) {
+            res.status(201).json({ mensaje: "Se inicio sesion", personas: { Nombre, Contraseña
+            
+        }
+        else{
+            res.send("Este usuario no existe");
         }
     });
 });
-
-//cerrar sesion
-App.post("/logout", (req, res) => {
-    req.session.destroy((err) => {
-        if (err) return res.status(500).json({massage: "error al cerrar sesion"});
-        res.clearCookie("connecr.sid");
-        res.json({success: true, message: "Sesion cerrada correctamente"});
-    });
 });
 
-App.listen(3000, () => console.log("Servidor corriendo en puerto 3001"));
+
+app.post("/logout", (req,res)=>{
+    req.session.destroy((err)=>{
+        if(err) return res.status(500).json({message:"error al cerrar sesion"})
+        res.clearCookie("connect.sid");
+        res.json({ success: true, message: "sesion cerrada correctamente"});
+    });
+})
+
+app.listen(3000, ()=> {
+    console.log("servidor corriendo en http://localhost:3000");
+})
