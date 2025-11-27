@@ -1,7 +1,6 @@
 import React from "react";
-import '../styes/componetes/inicio.css'
 
-function Inicio() {
+function Registrarse() {
   const handleSubmit = (e) => {
     e.preventDefault(); // Previene que la página se recargue
     // Aquí iría la lógica de autenticación
@@ -10,17 +9,18 @@ function Inicio() {
 
   return (
     <div>
-      <h1>¿Tenés Cuenta?</h1>
-      <h2>Inicio de sesión</h2>
+      <h1>Crea tu cuenta</h1>
+      <h2>Registro</h2>
       <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Apellido" />
         <input type="text" placeholder="Correo" />
         <input type="password" placeholder="Contraseña" />
         <button type="submit">Iniciar</button>
       </form> 
-      <p>Si no tenes cuenta:</p>
-      
+      <p>¿Ya tenes una cuenta?</p>
+       
     </div>
   );
 }
 
-export default Inicio;
+export default Registrarse;
