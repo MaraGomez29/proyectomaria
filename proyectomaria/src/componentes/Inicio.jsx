@@ -23,10 +23,10 @@ function Inicio () {
 
         <button type="submit">Entrar</button>
       </form>
-    </div>
+ </div>
 
 
-  );
+);
 
    
 }export default Inicio;  
