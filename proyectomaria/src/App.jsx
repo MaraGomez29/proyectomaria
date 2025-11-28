@@ -1,21 +1,25 @@
-import { useState } from "react";
-import Header from "./componentes/Header";
-import Footer from "./componentes/Footer";
-import Inicio from "./componentes/Inicio";
-import Registro from "./componentes/Registro";
-import Cerrar from "./componentes/Cerrar";
-import '../src/App.css'
+import { useState } from 'react';
+import "./App.css";
 
+import Inicio from './Componentes/Inicio';
+import Header from './Componentes/Header'; 
+import Footer from'./componentes/Footer';
+import Registrarse from './componentes/Registrarse';
+ 
 function App() {
+  const [count, setCount] = useState(1) 
 
   return (
-    <div>
-     <Header></Header>
-     <Inicio></Inicio> 
-      <Registro></Registro>
-     <Footer></Footer>
-    </div>
-  );
+    <>
+      <div>
+      <Header></Header>
+      <Inicio></Inicio> 
+      <Registrarse> </Registrarse>
+      <Footer></Footer>
+      </div>
+      
+    </>
+  )
 }
 
 export default App;

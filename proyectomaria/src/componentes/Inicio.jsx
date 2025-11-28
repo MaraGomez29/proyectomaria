@@ -1,5 +1,4 @@
 import React from "react";
-import '../styes/componetes/inicio.css'
 
 function Inicio() {
   const handleSubmit = (e) => {
@@ -17,8 +16,6 @@ function Inicio() {
         <input type="password" placeholder="Contraseña" />
         <button type="submit">Iniciar</button>
       </form> 
-      <p>Si no tenes cuenta:</p>
-      
     </div>
   );
 }
